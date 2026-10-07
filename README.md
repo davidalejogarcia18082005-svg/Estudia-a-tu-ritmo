@@ -4,6 +4,10 @@ Aplicación para organizar una sesión de estudio en bloques completos de 25 min
 
 ## Abrir la aplicación
 
+**Sitio publicado:** [Estudia a tu ritmo](https://davidalejogarcia18082005-svg.github.io/Estudia-a-tu-ritmo/).
+
+También se puede abrir una copia local:
+
 1. Guarda `index.html`, `styles.css` y `app.js` en la misma carpeta.
 2. Abre `index.html` con Chrome, Edge o Firefox.
 3. Elige una materia, escribe los minutos disponibles y selecciona la hora de inicio. Pulsa **Crear mi plan**.
@@ -23,7 +27,7 @@ La materia cambia el nombre mostrado; no modifica la duración de los bloques.
 
 Ahora se muestra **Terminas a las**, junto con la hora final del plan. Se propone la hora local del dispositivo como inicio; se puede cambiar. La hora final suma estudio y pausas. No suma los minutos libres y no añade un descanso final.
 
-Con inicio a las 16:00 y 60 minutos disponibles, el plan ocupa 55 minutos y termina a las **16:55**, con 5 minutos libres. Si empieza a las 23:30, termina a las **00:25 del día siguiente**. Las horas se muestran en formato de 24 horas.
+Con inicio a las 16:00 y 60 minutos disponibles, el plan ocupa 55 minutos y termina a las **16:55**, con 5 minutos libres. Si empieza a las 23:30, termina a las **00:25 del día siguiente**. La hora final se muestra en formato de 24 horas; el selector de inicio depende del formato del navegador.
 
 Al cambiar la hora de inicio se oculta el resultado anterior hasta volver a calcular. **Limpiar** propone de nuevo la hora actual del dispositivo. La aplicación es una guía: no inicia un cronómetro ni envía alarmas.
 
@@ -37,7 +41,7 @@ Al cambiar la hora de inicio se oculta el resultado anterior hasta volver a calc
 
 ## Pruebas de lógica realizadas
 
-Se ejecutó el JavaScript en Node.js con elementos y eventos simulados. Estas pruebas no sustituyen la comprobación de la interfaz en un navegador. No se ha verificado visualmente la aplicación ni su reapertura en un navegador.
+Primero se ejecutó el JavaScript en Node.js con elementos y eventos simulados. Las tablas de esta sección corresponden a esas comprobaciones. El 7 de octubre de 2026 también se completaron ocho pruebas reales en Chrome, documentadas más abajo.
 
 | Entrada | Resultado verificado en la simulación |
 | --- | --- |
@@ -66,7 +70,7 @@ Pruebas adicionales de la revisión, también con elementos y eventos simulados:
 | Hora vacía o inválida | Pide una hora de inicio válida. |
 | Cambiar de 16:00 a 17:00; 60 min | Oculta el plan anterior; al recalcular muestra 17:55. |
 
-## Qué revisar en el navegador
+## Cómo repetir las pruebas en el navegador
 
 Antes de cada acción, escribe en la tarjeta qué esperas. Luego ejecuta la acción y anota lo que realmente ves:
 
@@ -91,8 +95,25 @@ HTML, CSS y JavaScript sin frameworks, API externas, base de datos ni backend. S
 
 El avance inicial se publicó el 7 de octubre de 2026 como corrección posterior: [ver commit del avance original](https://github.com/davidalejogarcia18082005-svg/Estudia-a-tu-ritmo/commit/d11bfbb1be1fbb5eafc6c3e67c35d6d9f477ff8a). No se había entregado un enlace a un commit en Laboratorio 3.
 
-La versión actual incorpora la hora de inicio y finalización solicitada por el docente. Las pruebas registradas arriba se realizaron con elementos y eventos simulados; la captura de una prueba real en navegador sigue pendiente.
+La versión actual incorpora la hora de inicio y finalización solicitada por el docente. Se comprobó la aplicación publicada en Chrome y se obtuvieron capturas reales del plan, del aviso de mínimo 25 minutos y del cambio de día.
 
 ## Publicación en GitHub Pages
 
-Los archivos de la aplicación están en la raíz del repositorio. Para publicar, abre **Settings > Pages**, elige **Deploy from a branch**, selecciona **main** y **/(root)** y pulsa **Save**. La publicación y su enlace deben verificarse antes de añadirlos a la tarjeta.
+El sitio está publicado desde la rama `main` y la carpeta raíz del repositorio. El enlace se abrió y las interacciones se comprobaron en Chrome el 7 de octubre de 2026.
+
+## Pruebas reales en Chrome
+
+Realizadas por el asistente sobre el sitio público el 7 de octubre de 2026. Se registró lo esperado antes de cada acción y lo observado después. Las ocho pruebas coincidieron con lo esperado.
+
+| Acción | Resultado observado |
+| --- | --- |
+| 60 min; inicio 16:00 | Final 16:55; dos bloques; totales 50/5/5. |
+| 20 min | Aviso de mínimo 25; ningún plan visible. |
+| 25 min; inicio 16:00 | Final 16:25; un bloque; totales 25/0/0. |
+| 60 min; inicio 23:30 | Final 00:25 del día siguiente; totales 50/5/5. |
+| Limpiar | Oculta el plan, vacía los minutos y propone una hora válida. |
+| Repetir 60 min tras otros casos | Conserva 16:55 y los totales 50/5/5. |
+| Actualizar con un plan creado | Reinicia el formulario y oculta el resultado. |
+| Cerrar, reabrir y repetir 60 min | Abre sin plan guardado y vuelve a producir 16:55 y 50/5/5. |
+
+[Registro de expectativas, resultados y horas de las pruebas](evidencias/pruebas-navegador-20261007.json). El registro identifica el commit de código probado; este cambio solo añade documentación y evidencia.
