@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Organiza el tiempo que tienes en bloques de estudio de 25 minutos y descansos de 5 minutos.">
+  <meta name="description" content="Organiza bloques de estudio y descansos, y conoce a qué hora termina tu sesión.">
   <title>Estudia a tu ritmo</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f5548'/%3E%3Cpath d='M8 8h16v3H11v4h11v3H11v4h13v3H8z' fill='%23fff8e9'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
@@ -20,7 +20,7 @@
       <section class="intro" aria-labelledby="title">
         <p class="eyebrow">TU TIEMPO, BIEN REPARTIDO</p>
         <h1 id="title">Haz espacio para aprender.</h1>
-        <p>Elige una materia y el tiempo que tienes. Convierte esos minutos en un plan de estudio sencillo.</p>
+        <p>Elige una materia, tu tiempo disponible y la hora de inicio. Crea tu plan y conoce a qué hora terminas.</p>
       </section>
 
       <div class="workspace" id="workspace">
@@ -38,6 +38,10 @@
             <label for="minutes">¿Cuántos minutos tienes?</label>
             <div class="input-unit"><input id="minutes" name="minutes" type="number" min="25" max="240" step="1" placeholder="Ej. 60" inputmode="numeric" required aria-describedby="minutes-help error"><span aria-hidden="true">min</span></div>
             <p class="field-help" id="minutes-help">Escribe un número entero entre 25 y 240.</p>
+
+            <label for="start-time">¿A qué hora empiezas?</label>
+            <input id="start-time" name="start-time" type="time" step="60" required aria-describedby="start-help error">
+            <p class="field-help" id="start-help">Se propone la hora de tu dispositivo. Puedes cambiarla.</p>
             <p id="error" class="error" role="alert" hidden></p>
 
             <div class="actions">
@@ -57,6 +61,12 @@
           </div>
           <div id="result" hidden>
             <div class="plan-heading"><h3 id="plan-subject"></h3><span id="block-count" class="badge"></span></div>
+            <div class="finish-time">
+              <span>Terminas a las</span>
+              <strong id="end-time"></strong>
+              <span id="end-day" class="next-day" hidden>del día siguiente</span>
+              <p id="finish-context"></p>
+            </div>
             <div class="stats">
               <div><strong id="study-total"></strong><span>min de estudio</span></div>
               <div><strong id="break-total"></strong><span>min de descanso</span></div>
@@ -64,14 +74,14 @@
             </div>
             <p id="summary" class="summary"></p>
             <ol id="timeline" class="timeline" aria-label="Orden de la sesión"></ol>
-            <p class="result-note">Es una guía de tiempos; no inicia un temporizador.</p>
+            <p class="result-note">La hora final incluye las pausas entre bloques. Los minutos libres quedan fuera del plan. Es una guía; no inicia un temporizador.</p>
           </div>
         </section>
       </div>
       <p class="footnote">Puedes usarlo sin conexión. El plan se reinicia al actualizar o cerrar la página.</p>
       <noscript><p class="error">Activa JavaScript en tu navegador para crear el plan.</p></noscript>
     </main>
-    <footer>Estudia a tu ritmo <span>Laboratorio 3 · CMP1001</span></footer>
+    <footer>Estudia a tu ritmo <span>Proyecto 1 · CMP1001</span></footer>
   </div>
 </body>
 </html>
